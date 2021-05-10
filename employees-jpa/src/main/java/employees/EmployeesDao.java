@@ -16,11 +16,14 @@ public class EmployeesDao {
         em.getTransaction().begin();
         em.persist(employee);
         em.getTransaction().commit();
+        em.close();
     }
 
     public List<Employee> findAll() {
         EntityManager em = entityManagerFactory.createEntityManager();
-        return em.createQuery("select e from Employee e", Employee.class).getResultList();
+        List<Employee> employees = em.createQuery("select e from Employee e", Employee.class).getResultList();
+        em.close();
+        return employees;
     }
 
     // TODO Implementálni - írjatok rá egy tesztesetet
