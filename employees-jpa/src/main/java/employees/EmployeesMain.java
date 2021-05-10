@@ -3,7 +3,6 @@ package employees;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import javax.sql.DataSource;
 import java.util.List;
 
 public class EmployeesMain {
@@ -16,9 +15,11 @@ public class EmployeesMain {
 
         entityManager.getTransaction().begin();
 
-        Employee employee = new Employee("John Doe");
-        entityManager.persist(employee);
-
+        for (int i = 0; i < 10; i ++) {
+            Employee employee = new Employee("John Doe");
+            entityManager.persist(employee);
+            System.out.println(employee.getId());
+        }
         entityManager.getTransaction().commit();
 
         List<Employee> employees = entityManager
