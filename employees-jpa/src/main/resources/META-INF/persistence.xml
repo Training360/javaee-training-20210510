@@ -9,6 +9,7 @@
         <properties>
             <!-- Java EE - DataSource -->
 
+            <!-- H2 -->
 <!--            <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>-->
 <!--            <property name="javax.persistence.jdbc.user" value="sa"/>-->
 <!--            <property name="javax.persistence.jdbc.password" value="sa"/>-->
@@ -26,16 +27,25 @@
 <!--                        <property name="javax.persistence.schema-generation.database.action"-->
 <!--                                  value="create"/>-->
 
+            <!-- Postgresql -->
+
             <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
             <property name="javax.persistence.jdbc.user" value="postgres"/>
             <property name="javax.persistence.jdbc.password" value="password"/>
             <property name="javax.persistence.jdbc.url"
                       value="jdbc:postgresql:postgres"/>
-            <property name="hibernate.dialect"
-                      value="org.hibernate.dialect.PostgreSQL10Dialect"/>
-            <property name="hibernate.show_sql" value="true"/>
 
-            <property name="hibernate.hbm2ddl.auto" value="update" />
+            <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
+
+            <property name="eclipselink.logging.level.sql" value="FINE"/>
+
+                        <!-- EclipseLink miatt nem kell -->
+
+<!--            <property name="hibernate.dialect"-->
+<!--                      value="org.hibernate.dialect.PostgreSQL10Dialect"/>-->
+<!--            <property name="hibernate.show_sql" value="true"/>-->
+
+<!--            <property name="hibernate.hbm2ddl.auto" value="update" />-->
 
         </properties>
     </persistence-unit>
