@@ -1,9 +1,14 @@
 package employees;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "employees")
+@Data
+@NoArgsConstructor
 public class Employee {
 
     @Id
@@ -13,26 +18,7 @@ public class Employee {
     @Column(name = "emp_name")
     private String name;
 
-    public Employee() {
-    }
-
     public Employee(String name) {
-        this.name = name;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
         this.name = name;
     }
 }
