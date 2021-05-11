@@ -90,10 +90,10 @@ public class EmployeesDao {
         // Reference-re ráhívva betölti
         //System.out.println("***" + employee.getName());
 
-        //address.setEmployee(employee);
-        employee.addAddress(address);
+        address.setEmployee(employee);
+        //employee.addAddress(address);
 
-        //em.persist(address);
+        em.persist(address);
 
         em.getTransaction().commit();
         System.out.println("*commit");

@@ -29,9 +29,9 @@ public class Employee {
     @ElementCollection
     private Map<String, String> phoneNumbers = new HashMap<>();
 
-    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
     //@OrderBy("city")
-    @OrderColumn(name = "emp_order")
+    //@OrderColumn(name = "emp_order")
     private List<Address> addresses = new ArrayList<>();
 
     public Employee(String name) {
@@ -47,21 +47,4 @@ public class Employee {
         address.setEmployee(this);
     }
 
-    @Override
-    public String toString() {
-        return "Employee{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                '}' + super.toString();
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        return super.equals(o);
-    }
-
-    @Override
-    public int hashCode() {
-        return super.hashCode();
-    }
 }
