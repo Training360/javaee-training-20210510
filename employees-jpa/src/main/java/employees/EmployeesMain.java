@@ -25,7 +25,24 @@ public class EmployeesMain {
             // Hibernate itt már kiosztja az azonosítókat
             System.out.println(employee);
         }
+
+        System.out.println("Load back");
+
+        List<Employee> employeesLoadad = entityManager
+                .createQuery("select e from Employee e", Employee.class)
+                .getResultList();
+
+        System.out.println(employeesLoadad);
+
+        System.out.println("Find by id");
+        Employee employee = entityManager.find(Employee.class, added.get(0).getId());
+        System.out.println(employee);
+
         entityManager.getTransaction().commit();
+
+        entityManager.clear();
+
+        System.out.println("Query after commit");
 
         // EclipseLink csak itt osztja ki az azonosítókat
         added.forEach(e -> System.out.println(e));
@@ -35,6 +52,8 @@ public class EmployeesMain {
                 .getResultList();
 
         employees.forEach(e -> System.out.println(e));
+
+        entityManager.close();
 
     }
 }

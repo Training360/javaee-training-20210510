@@ -52,4 +52,26 @@ public class EmployeesDao {
         em.close();
         return employee;
     }
+
+    public Employee update(UpdateEmployeeCommand command) {
+        EntityManager em = entityManagerFactory.createEntityManager();
+        em.getTransaction().begin();
+
+        Employee employee = em.find(Employee.class, command.getId());
+        employee.setName(command.getName());
+        em.getTransaction().commit();
+        em.close();
+        return employee;
+    }
+
+//    public void merge(Employee employee) {
+//        EntityManager em = entityManagerFactory.createEntityManager();
+//        em.getTransaction().begin();
+//        Employee managed = em.merge(employee);
+//        // elmentésre kerül!
+//        managed.setName("adsafds");
+//
+//        em.getTransaction().commit();
+//        em.close();
+//    }
 }
