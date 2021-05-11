@@ -31,6 +31,7 @@ public class Employee {
 
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
     //@OrderBy("city")
+    @OrderColumn(name = "emp_order")
     private List<Address> addresses = new ArrayList<>();
 
     public Employee(String name) {

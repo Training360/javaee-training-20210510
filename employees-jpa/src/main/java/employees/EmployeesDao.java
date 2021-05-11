@@ -81,6 +81,7 @@ public class EmployeesDao {
 
     public void addAddressTo(long employeeId, Address address) {
         EntityManager em = entityManagerFactory.createEntityManager();
+        System.out.println("*begin");
         em.getTransaction().begin();
 
         //Employee employee = em.find(Employee.class, employeeId); / EHHEZ VAN EGY FELESLEGES SELECT
@@ -89,12 +90,13 @@ public class EmployeesDao {
         // Reference-re ráhívva betölti
         //System.out.println("***" + employee.getName());
 
-        address.setEmployee(employee);
-        //employee.addAddress(address);
+        //address.setEmployee(employee);
+        employee.addAddress(address);
 
-        em.persist(address);
+        //em.persist(address);
 
         em.getTransaction().commit();
+        System.out.println("*commit");
         em.close();
     }
 
