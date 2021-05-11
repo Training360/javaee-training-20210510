@@ -36,6 +36,10 @@ public class EmployeesDao {
         return employees;
     }
 
+//    public List<Employee> findAllWithNickNames() {
+//        // TODO töltse be egy selecttel az összes alkalmazottat az összes nickkel
+//    }
+
     public Employee findById(long id) {
         EntityManager em = entityManagerFactory.createEntityManager();
         Employee employee = em.find(Employee.class, id);
@@ -74,4 +78,35 @@ public class EmployeesDao {
 //        em.getTransaction().commit();
 //        em.close();
 //    }
+
+    public void addAddressTo(long employeeId, Address address) {
+        EntityManager em = entityManagerFactory.createEntityManager();
+        em.getTransaction().begin();
+
+        //Employee employee = em.find(Employee.class, employeeId); / EHHEZ VAN EGY FELESLEGES SELECT
+        Employee employee = em.getReference(Employee.class, employeeId); // Proxy Employee obj. - CSAK id-ja van kitöltve
+
+        // Reference-re ráhívva betölti
+        //System.out.println("***" + employee.getName());
+
+        address.setEmployee(employee);
+        //employee.addAddress(address);
+
+        em.persist(address);
+
+        em.getTransaction().commit();
+        em.close();
+    }
+
+    public Employee findEmployeeWithAddressesById(long id) {
+        EntityManager em = entityManagerFactory.createEntityManager();
+        try {
+            return em.createQuery("select distinct e from Employee e left join fetch e.addresses where e.id = :id", Employee.class)
+                    .setParameter("id", id)
+                    .getSingleResult();
+        }
+        finally {
+            em.close();
+        }
+    }
 }

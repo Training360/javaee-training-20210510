@@ -95,4 +95,14 @@ class EmployeesDaoTest {
         assertEquals("John John Doe", loaded.getName());
     }
 
+    @Test
+    void test_add_address() {
+        Employee employee = employeesDao.save("John Doe");
+        employeesDao.addAddressTo(employee.getId(), new Address("Budapest"));
+        employeesDao.addAddressTo(employee.getId(), new Address("Párizs"));
+
+        Employee loaded = employeesDao.findEmployeeWithAddressesById(employee.getId());
+        assertThat(loaded.getAddresses()).extracting(Address::getCity).containsExactlyInAnyOrder("Budapest", "Párizs");
+    }
+
 }
