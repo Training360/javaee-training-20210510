@@ -11,6 +11,9 @@ public class ConnectionMain {
     public static void main(String[] args) {
             EntityManagerFactory entityManagerFactory =
                     Persistence.createEntityManagerFactory("pu");
+
+            new DbInit().init(entityManagerFactory);
+
             EntityManager entityManager = entityManagerFactory.createEntityManager();
 
             entityManager.getTransaction().begin();

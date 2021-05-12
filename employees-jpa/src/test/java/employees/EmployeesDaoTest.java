@@ -20,6 +20,7 @@ class EmployeesDaoTest {
     @BeforeEach
     void init() {
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("pu");
+        new DbInit().init(entityManagerFactory);
         deleteAll(entityManagerFactory);
         employeesDao = new EmployeesDao(entityManagerFactory);
     }
