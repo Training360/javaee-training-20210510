@@ -30,7 +30,7 @@ public class Employee {
     @ElementCollection
     private Map<String, String> phoneNumbers = new HashMap<>();
 
-    @OneToMany(mappedBy = "employee", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
     //@OrderBy("city")
     @OrderColumn(name = "number")
     private List<Address> addresses = new ArrayList<>();

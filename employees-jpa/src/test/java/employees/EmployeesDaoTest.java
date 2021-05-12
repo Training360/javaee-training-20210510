@@ -28,6 +28,7 @@ class EmployeesDaoTest {
     void deleteAll(EntityManagerFactory entityManagerFactory) {
         EntityManager em = entityManagerFactory.createEntityManager();
         em.getTransaction().begin();
+        em.createQuery("delete from Address a").executeUpdate();
         em.createQuery("delete from Employee e").executeUpdate();
         em.getTransaction().commit();
         em.close();

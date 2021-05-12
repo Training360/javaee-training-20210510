@@ -124,8 +124,8 @@ public class EmployeesDao {
 
         try {
 //          Employee employee = findAll().get(0);
-            Employee employee = em.find(Employee.class, 1L);
-            System.out.println(employee.getAddresses().getClass().getName());
+//            Employee employee = em.find(Employee.class, 1L);
+//            System.out.println(employee.getAddresses().getClass().getName());
 //            System.out.println(employee.getAddresses().toString());
 //            System.out.println(employee.getName());
 
@@ -136,13 +136,13 @@ public class EmployeesDao {
 
             em.getTransaction().commit();
 
-            em.refresh(employee);
+//            em.refresh(employee);
 //            em.clear();
 
-            System.out.println(employee.getAddresses());
+//            System.out.println(employee.getAddresses());
 
-            employee = em.find(Employee.class, 1L);
-            System.out.println(employee.getName());
+//            employee = em.find(Employee.class, 1L);
+//            System.out.println(employee.getName());
 
         }
         finally {
