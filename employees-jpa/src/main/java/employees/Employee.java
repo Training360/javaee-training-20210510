@@ -11,6 +11,7 @@ import java.util.*;
 @Table(name = "employees")
 @Data
 @NoArgsConstructor
+@NamedQuery(name = "toUpper", query = "update Employee e set e.name = upper(e.name)")
 public class Employee {
 
     @Id
@@ -29,7 +30,7 @@ public class Employee {
     @ElementCollection
     private Map<String, String> phoneNumbers = new HashMap<>();
 
-    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.PERSIST)
     //@OrderBy("city")
     @OrderColumn(name = "number")
     private List<Address> addresses = new ArrayList<>();
@@ -51,4 +52,11 @@ public class Employee {
         address.setEmployee(this);
     }
 
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

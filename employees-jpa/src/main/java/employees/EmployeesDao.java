@@ -62,7 +62,9 @@ public class EmployeesDao {
         em.getTransaction().begin();
 
         Employee employee = em.find(Employee.class, command.getId());
-        employee.setName(command.getName());
+        employee.setName(command.getName()); // Jack Doe // John Doe // update set name = ''
+                // Weaving buherál set ->
+
         em.getTransaction().commit();
         em.close();
         return employee;
@@ -109,6 +111,39 @@ public class EmployeesDao {
             return em.createQuery("select distinct e from Employee e left join fetch e.addresses where e.id = :id", Employee.class)
                     .setParameter("id", id)
                     .getSingleResult();
+        }
+        finally {
+            em.close();
+        }
+    }
+
+    public void updateEmployeesChangeNameToUppercase() {
+        EntityManager em = entityManagerFactory.createEntityManager();
+
+        //entityManagerFactory.getCache().
+
+        try {
+//          Employee employee = findAll().get(0);
+            Employee employee = em.find(Employee.class, 1L);
+            System.out.println(employee.getAddresses().getClass().getName());
+//            System.out.println(employee.getAddresses().toString());
+//            System.out.println(employee.getName());
+
+            em.getTransaction().begin();
+            em.createNamedQuery("toUpper").executeUpdate();
+
+//            employee = em.find(Employee.class, employee.getId());
+
+            em.getTransaction().commit();
+
+            em.refresh(employee);
+//            em.clear();
+
+            System.out.println(employee.getAddresses());
+
+            employee = em.find(Employee.class, 1L);
+            System.out.println(employee.getName());
+
         }
         finally {
             em.close();

@@ -105,4 +105,19 @@ class EmployeesDaoTest {
         assertThat(loaded.getAddresses()).extracting(Address::getCity).containsExactlyInAnyOrder("Budapest", "Párizs");
     }
 
+    @Test
+    void test_upper() {
+        Employee employee = employeesDao.save("John Doe");
+        employeesDao.addAddressTo(employee.getId(), new Address("Budapest"));
+        employeesDao.addAddressTo(employee.getId(), new Address("Zirc"));
+
+        employeesDao.save("Jack Doe");
+
+        employeesDao.updateEmployeesChangeNameToUppercase();
+
+        List<Employee> employees = employeesDao.findAll();
+        assertThat(employees).extracting(Employee::getName)
+                .containsExactly("JACK DOE", "JOHN DOE");
+    }
+
 }
