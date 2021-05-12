@@ -1696,3 +1696,71 @@ class: inverse, center, middle
 ## Csak olvasható
 
 * Spring esetén további optimalizációkat tud elvégezni, cache-eléssel kapcsolatos
+
+---
+
+class: inverse, center, middle
+
+
+
+# Cache
+
+---
+
+# Cache szintjei
+
+* Kétszintű
+  * Persistence context, Entity manager szinten (first level)
+  * Shared cached, Entity manager factory szinten (nem a legjobb elnevezés a second level)
+
+---
+
+# Shared cache
+
+* `Cache` interface
+  * `contains()`
+  * evolve metódusok
+* `EntityManagerFactory.getCache()`
+
+---
+
+# Deklaratív cache
+
+* Persistence unit szinten
+* Entitás szinten
+* `javax.persistence.sharedCache.mode`
+  * `NOT_SPECIFIED` - persistence provider dönt
+  * `ALL`
+  * `NONE`
+  * `DISABLE_SELECTIVE`, `@Cacheable(false)`
+  * `ENABLE_SELECTIVE`, `@Cacheable(true)`
+---
+
+# Dynamic cache management
+
+* `find()` metódus vagy query hint (shared cache-re van hatással, nem a persistence contextre)
+* `javax.persistence.cache.retrieveMode` és `javax.persistence.cache.storeMode` paraméter
+* `CacheRetrieveMode` és `CacheStoreMode`
+
+---
+
+# Típusok
+
+* `CacheRetrieveMode`
+  * `USE` cache-ből olvas
+  * `BYPASS` cache megkerülésével mindig adatbázisból olvas
+* `CacheStoreMode`
+  * `USE` cache-be beteszi a felolvasott entitásokat
+  * `BYPASS` nem teszi cache-be a felolvasott entitásokat
+  * `REFRESH` mindig frissíti a cache-t - ha az adatbázist más is írja
+* `refresh()` metódusnál is használható a `CacheStoreMode.REFRESH`
+
+---
+
+# Best practices
+
+* Alkalmazás ne módosítsa a cache-t explicit módon
+* Cache törlése pl. automatizált tesztelésnél
+* Több kliens módosítja az adatbázist
+  * Nem jó megoldás a cache kikapcsolása
+  * Helyette: lock, refresh
