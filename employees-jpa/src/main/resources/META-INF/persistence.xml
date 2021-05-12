@@ -36,7 +36,9 @@
             <property name="javax.persistence.jdbc.url"
                       value="jdbc:postgresql:postgres"/>
 
-            <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
+            <!-- <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/> -->
+
+            <property name="javax.persistence.schema-generation.database.action" value="none"/>
 
             <property name="eclipselink.logging.level.sql" value="FINE"/>
 

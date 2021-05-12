@@ -12,6 +12,9 @@ public class EmployeesMain {
         // Factory Method - Abstract Factory tervezési minta
         EntityManagerFactory entityManagerFactory =
                 Persistence.createEntityManagerFactory("pu");
+
+        new DbInit().init(entityManagerFactory);
+
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
         entityManager.getTransaction().begin();
