@@ -31,8 +31,12 @@ public class Employee {
 
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
     //@OrderBy("city")
-    //@OrderColumn(name = "emp_order")
+    @OrderColumn(name = "number")
     private List<Address> addresses = new ArrayList<>();
+
+//    @Lob // 3MB TeX
+//    @Basic(fetch = FetchType.LAZY) // Hibernate - nem működik
+//    private String cv;
 
     public Employee(String name) {
         this.name = name;

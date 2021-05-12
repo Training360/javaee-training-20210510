@@ -84,16 +84,19 @@ public class EmployeesDao {
         System.out.println("*begin");
         em.getTransaction().begin();
 
-        //Employee employee = em.find(Employee.class, employeeId); / EHHEZ VAN EGY FELESLEGES SELECT
-        Employee employee = em.getReference(Employee.class, employeeId); // Proxy Employee obj. - CSAK id-ja van kitöltve
+        Employee employee = em.find(Employee.class, employeeId); // EHHEZ VAN EGY FELESLEGES SELECT
+//        Employee employee = em.getReference(Employee.class, employeeId); // Proxy Employee obj. - CSAK id-ja van kitöltve
+//
+//        // Reference-re ráhívva betölti
+//        //System.out.println("***" + employee.getName());
+//
+//        address.setEmployee(employee);
+        employee.addAddress(address);
+//
+        //em.persist(address);
 
-        // Reference-re ráhívva betölti
-        //System.out.println("***" + employee.getName());
-
-        address.setEmployee(employee);
-        //employee.addAddress(address);
-
-        em.persist(address);
+//        Employee employee = em.find(Employee.class, employeeId);
+//        employee.addAddress(address);
 
         em.getTransaction().commit();
         System.out.println("*commit");

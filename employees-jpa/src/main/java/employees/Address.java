@@ -16,9 +16,6 @@ public class Address {
 
     private String city;
 
-//    @Column(name = "emp_order")
-//    private int order;
-
     @ManyToOne
     private Employee employee;
 
