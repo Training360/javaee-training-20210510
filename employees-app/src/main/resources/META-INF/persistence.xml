@@ -20,7 +20,7 @@
             <property name="hibernate.cache.use_query_cache" value="true"/>
 
             <!-- Generate statistics to see effects of second level cache -->
-            <property name="hibernate.generate_statistics" value="true" />
+<!--            <property name="hibernate.generate_statistics" value="true" />-->
         </properties>
     </persistence-unit>
 </persistence>
