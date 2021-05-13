@@ -13,14 +13,14 @@ public class EmployeesService {
     @EJB
     private EmployeesDao employeesDao;
 
+    private EmployeeMapper mapper = new EmployeeMapperImpl();
+
     public EmployeeDto save(CreateEmployeeCommand command) {
         // Mapper
-        Employee employee = new Employee();
-        employee.setName(command.getName());
-        employee.setAmount(command.getAmount());
+        Employee employee = mapper.toEntity(command);
         employeesDao.save(employee);
 
-        return toDto(employee);
+        return mapper.toDto(employee);
     }
 
     @TransactionAttribute(TransactionAttributeType.NEVER)
@@ -32,17 +32,9 @@ public class EmployeesService {
         return employeesDao.findAllDto();
     }
 
-    private EmployeeDto toDto(Employee employee) {
-        EmployeeDto dto = new EmployeeDto();
-        dto.setId(employee.getId());
-        dto.setName(employee.getName());
-        dto.setAmount(employee.getAmount());
-        return dto;
-    }
-
     public EmployeeDto credit(CreditCommand command) {
         Employee employee = employeesDao.findById(command.getEmployeeId());
         employee.setAmount(employee.getAmount() + command.getDiff());
-        return toDto(employee);
+        return mapper.toDto(employee);
     }
 }
