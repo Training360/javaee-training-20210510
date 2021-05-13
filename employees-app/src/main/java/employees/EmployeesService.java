@@ -39,4 +39,10 @@ public class EmployeesService {
         dto.setAmount(employee.getAmount());
         return dto;
     }
+
+    public EmployeeDto credit(CreditCommand command) {
+        Employee employee = employeesDao.findById(command.getEmployeeId());
+        employee.setAmount(employee.getAmount() + command.getDiff());
+        return toDto(employee);
+    }
 }

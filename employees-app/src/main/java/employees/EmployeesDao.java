@@ -26,4 +26,8 @@ public class EmployeesDao {
         .setHint("org.hibernate.cacheable", true)
                 .getResultList();
     }
+
+    public Employee findById(long employeeId) {
+        return entityManager.find(Employee.class, employeeId);
+    }
 }
