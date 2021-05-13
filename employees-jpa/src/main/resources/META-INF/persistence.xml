@@ -7,6 +7,9 @@
                       transaction-type="RESOURCE_LOCAL">
         <class>employees.Employee</class>
         <class>employees.Address</class>
+
+        <shared-cache-mode>ALL</shared-cache-mode>
+
         <properties>
             <!-- Java EE - DataSource -->
 
@@ -20,7 +23,10 @@
 <!--                      value="org.hibernate.dialect.H2Dialect"/>-->
             <property name="hibernate.show_sql" value="true"/>
 
-<!--            <property name="hibernate.hbm2ddl.auto" value="update" />-->
+            <property name="hibernate.cache.region.factory_class" value="org.hibernate.cache.ehcache.EhCacheRegionFactory" />
+
+
+            <!--            <property name="hibernate.hbm2ddl.auto" value="update" />-->
 
 <!--            <property name="javax.persistence.schema-generation.database.action"-->
 <!--                      value="drop-and-create"/>-->
