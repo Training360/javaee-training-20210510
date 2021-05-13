@@ -10,6 +10,8 @@ public class EmployeesMain {
             EmployeesService employeesService = container.select(EmployeesService.class).get();
 
             employeesService.save();
+
+            employeesService.timerExpired();
         }
     }
 }
