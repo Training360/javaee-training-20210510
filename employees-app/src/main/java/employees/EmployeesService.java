@@ -1,9 +1,8 @@
 package employees;
 
-import javax.ejb.EJB;
-import javax.ejb.Stateless;
-import javax.ejb.TransactionAttribute;
-import javax.ejb.TransactionAttributeType;
+import javax.annotation.Resource;
+import javax.ejb.*;
+import javax.transaction.UserTransaction;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -32,9 +31,15 @@ public class EmployeesService {
         return employeesDao.findAllDto();
     }
 
-    public EmployeeDto credit(CreditCommand command) {
+    //@Asynchronous
+    public void credit(CreditCommand command) throws NotEnoughMoneyException {
+        System.out.println(Thread.currentThread().getName());
+
         Employee employee = employeesDao.findById(command.getEmployeeId());
+        if (employee.getAmount() + command.getDiff() < 0) {
+            throw new NotEnoughMoneyException("Can not credit");
+        }
         employee.setAmount(employee.getAmount() + command.getDiff());
-        return mapper.toDto(employee);
+        //return mapper.toDto(employee);
     }
 }

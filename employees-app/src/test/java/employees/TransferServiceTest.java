@@ -19,7 +19,7 @@ public class TransferServiceTest {
     TransferService transferService;
 
     @Test
-    void testTransfer() {
+    void testTransfer() throws NotEnoughMoneyException {
         transferService.transfer(new TransferCommand(1, 2, 500));
 
         Mockito.verify(employeesService).credit(argThat(c -> c.getEmployeeId() == 1 && c.getDiff() == -500));
